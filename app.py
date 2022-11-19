@@ -24,6 +24,11 @@ def home_page():
 @app.route('/questions/<int:num>')
 def display_question(num):
     """Provide question/choices based on number"""
+    if num != q_num[0]:
+        return redirect(f'/questions/{q_num[0]}')
+    if q_num[0] > q_num[1]:
+        return redirect('/thanks')
+
     idx = num - 1
     title = s.satisfaction_survey.title
     question = s.satisfaction_survey.questions[idx].question
