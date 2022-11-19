@@ -4,6 +4,9 @@
 
 {% block content %}
 <h1 class="display-4 text-center mb-5">{{title}}</h1>
+{% for msg in get_flashed_messages() %}
+<p class="text-center mb-3" style="font-size: 24px">{{msg}}</h4>
+{% endfor %}
 <h3 class="text-center mb-4">Question {{num}}</h3>
 <p class="text-center mb-3" style="font-size: 24px">{{question}}</h4>
 <form action="/answer" method="POST" class="text-center" style="font-size: 24px">

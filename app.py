@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 import surveys as s
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -25,6 +25,7 @@ def home_page():
 def display_question(num):
     """Provide question/choices based on number"""
     if num != q_num[0]:
+        flash('Error: Invalid Request')
         return redirect(f'/questions/{q_num[0]}')
     if q_num[0] > q_num[1]:
         return redirect('/thanks')
