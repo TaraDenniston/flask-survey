@@ -9,6 +9,7 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 responses = []
+q_num = [0, len(s.satisfaction_survey.questions)]
 
 @app.route('/')
 def home_page():
@@ -23,5 +24,15 @@ def display_question(num):
     choices = s.satisfaction_survey.questions[num].choices
     return render_template('questions.html', title=title, question=question, \
         choices=choices, num=num)
+
+@app.route('/answer', methods=["POST"])
+def record_answer():
+    answer = request.form['question']
+    print(answer)
+    responses.append(answer)
+    q_num[0] += 1
+    url = f'/questions/{q_num[0]}'
+    return redirect(url)
+
 
 
